@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin } from "lucide-react";
-import logo from "@/assets/logo-eht.svg";
+import logo from "@/assets/logo-eht-light.svg";
 import { company } from "@/lib/site";
 
 export function SiteFooter() {

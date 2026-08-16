@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo-eht.svg";
+import logo from "@/assets/logo-eht-light.svg";
 import { CtaButton } from "@/components/CtaButton";
 import { cn } from "@/lib/utils";
 
