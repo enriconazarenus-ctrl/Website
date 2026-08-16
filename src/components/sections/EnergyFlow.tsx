@@ -57,8 +57,8 @@ export function EnergyFlow() {
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
                   Schritt {String(active + 1).padStart(2, "0")}
                 </p>
-                <h3 className="display-3 mt-3">{steps[active].title}</h3>
-                <p className="mt-2 leading-relaxed text-ink-foreground/70">{steps[active].text}</p>
+                <h3 className="display-3 mt-3">{steps[active]?.title}</h3>
+                <p className="mt-2 leading-relaxed text-ink-foreground/70">{steps[active]?.text}</p>
               </div>
 
               <div className="mt-8 h-px w-full max-w-md bg-ink-foreground/15">
