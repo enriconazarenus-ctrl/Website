@@ -19,6 +19,8 @@
  */
 
 @theme inline {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -59,29 +61,45 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-surface: var(--surface);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-deep: var(--brand-deep);
+  --color-line: var(--line);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.004 85);
+  --foreground: oklch(0.235 0.016 258);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.235 0.016 258);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.235 0.016 258);
+  --primary: oklch(0.702 0.176 52);
+  --primary-foreground: oklch(0.16 0.01 260);
+  --secondary: oklch(0.383 0.112 268);
+  --secondary-foreground: oklch(0.98 0.004 85);
+  --muted: oklch(0.955 0.006 85);
+  --muted-foreground: oklch(0.505 0.014 258);
+  --accent: oklch(0.945 0.032 72);
+  --accent-foreground: oklch(0.28 0.05 45);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.9 0.008 85);
+  --input: oklch(0.9 0.008 85);
+  --ring: oklch(0.702 0.176 52);
+  --ink: oklch(0.208 0.018 258);
+  --ink-foreground: oklch(0.975 0.005 85);
+  --ink-muted: oklch(0.735 0.012 258);
+  --surface: oklch(0.968 0.006 85);
+  --brand: oklch(0.702 0.176 52);
+  --brand-deep: oklch(0.383 0.112 268);
+  --brand-foreground: oklch(0.16 0.01 260);
+  --line: oklch(0.9 0.008 85);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +158,207 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: var(--brand-foreground);
+  }
+}
+
+/* ---------- Design system utilities ---------- */
+
+@utility container-eht {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 82rem;
+}
+
+@utility section-y {
+  padding-block: 5rem;
+  @media (min-width: 768px) {
+    padding-block: 7.5rem;
+  }
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+@utility display-1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+}
+
+@utility display-2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+}
+
+@utility display-3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+}
+
+@utility lead {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+@utility hairline {
+  border-top: 1px solid var(--line);
+}
+
+@utility brand-gradient-text {
+  background: linear-gradient(96deg, oklch(0.66 0.19 35), oklch(0.78 0.16 72));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility brand-rule {
+  background: linear-gradient(90deg, oklch(0.66 0.19 35), oklch(0.78 0.16 72));
+}
+
+/* Scroll reveal */
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-mask {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-mask.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes eht-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes eht-slow-zoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes eht-dash {
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+.animate-rise {
+  animation: eht-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slow-zoom {
+  animation: eht-slow-zoom 14s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-mask {
+    clip-path: none;
+  }
+}
+
+@keyframes eht-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes eht-check {
+  from {
+    stroke-dashoffset: 60;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes eht-ring {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

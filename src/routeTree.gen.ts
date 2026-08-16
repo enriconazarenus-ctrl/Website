@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as PhotovoltaikRouteImport } from './routes/photovoltaik'
+import { Route as StromspeicherRouteImport } from './routes/stromspeicher'
+import { Route as WaermepumpeRouteImport } from './routes/waermepumpe'
+import { Route as WallboxRouteImport } from './routes/wallbox'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhotovoltaikRoute = PhotovoltaikRouteImport.update({
+  id: '/photovoltaik',
+  path: '/photovoltaik',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StromspeicherRoute = StromspeicherRouteImport.update({
+  id: '/stromspeicher',
+  path: '/stromspeicher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WaermepumpeRoute = WaermepumpeRouteImport.update({
+  id: '/waermepumpe',
+  path: '/waermepumpe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WallboxRoute = WallboxRouteImport.update({
+  id: '/wallbox',
+  path: '/wallbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/photovoltaik': typeof PhotovoltaikRoute
+  '/stromspeicher': typeof StromspeicherRoute
+  '/waermepumpe': typeof WaermepumpeRoute
+  '/wallbox': typeof WallboxRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/photovoltaik': typeof PhotovoltaikRoute
+  '/stromspeicher': typeof StromspeicherRoute
+  '/waermepumpe': typeof WaermepumpeRoute
+  '/wallbox': typeof WallboxRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/photovoltaik': typeof PhotovoltaikRoute
+  '/stromspeicher': typeof StromspeicherRoute
+  '/waermepumpe': typeof WaermepumpeRoute
+  '/wallbox': typeof WallboxRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/photovoltaik'
+    | '/stromspeicher'
+    | '/waermepumpe'
+    | '/wallbox'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/photovoltaik'
+    | '/stromspeicher'
+    | '/waermepumpe'
+    | '/wallbox'
+  id:
+    | '__root__'
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/photovoltaik'
+    | '/stromspeicher'
+    | '/waermepumpe'
+    | '/wallbox'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
+  PhotovoltaikRoute: typeof PhotovoltaikRoute
+  StromspeicherRoute: typeof StromspeicherRoute
+  WaermepumpeRoute: typeof WaermepumpeRoute
+  WallboxRoute: typeof WallboxRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/photovoltaik': {
+      id: '/photovoltaik'
+      path: '/photovoltaik'
+      fullPath: '/photovoltaik'
+      preLoaderRoute: typeof PhotovoltaikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stromspeicher': {
+      id: '/stromspeicher'
+      path: '/stromspeicher'
+      fullPath: '/stromspeicher'
+      preLoaderRoute: typeof StromspeicherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/waermepumpe': {
+      id: '/waermepumpe'
+      path: '/waermepumpe'
+      fullPath: '/waermepumpe'
+      preLoaderRoute: typeof WaermepumpeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wallbox': {
+      id: '/wallbox'
+      path: '/wallbox'
+      fullPath: '/wallbox'
+      preLoaderRoute: typeof WallboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
+  PhotovoltaikRoute: PhotovoltaikRoute,
+  StromspeicherRoute: StromspeicherRoute,
+  WaermepumpeRoute: WaermepumpeRoute,
+  WallboxRoute: WallboxRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
