@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as PhotovoltaikRouteImport } from './routes/photovoltaik'
 import { Route as StromspeicherRouteImport } from './routes/stromspeicher'
 import { Route as WaermepumpeRouteImport } from './routes/waermepumpe'
@@ -18,6 +20,16 @@ import { Route as WallboxRouteImport } from './routes/wallbox'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PhotovoltaikRoute = PhotovoltaikRouteImport.update({
@@ -43,6 +55,8 @@ const WallboxRoute = WallboxRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
   '/photovoltaik': typeof PhotovoltaikRoute
   '/stromspeicher': typeof StromspeicherRoute
   '/waermepumpe': typeof WaermepumpeRoute
@@ -50,6 +64,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
   '/photovoltaik': typeof PhotovoltaikRoute
   '/stromspeicher': typeof StromspeicherRoute
   '/waermepumpe': typeof WaermepumpeRoute
@@ -58,6 +74,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
   '/photovoltaik': typeof PhotovoltaikRoute
   '/stromspeicher': typeof StromspeicherRoute
   '/waermepumpe': typeof WaermepumpeRoute
@@ -66,12 +84,27 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/photovoltaik' | '/stromspeicher' | '/waermepumpe' | '/wallbox'
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/photovoltaik'
+    | '/stromspeicher'
+    | '/waermepumpe'
+    | '/wallbox'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/photovoltaik' | '/stromspeicher' | '/waermepumpe' | '/wallbox'
+  to:
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/photovoltaik'
+    | '/stromspeicher'
+    | '/waermepumpe'
+    | '/wallbox'
   id:
     | '__root__'
     | '/'
+    | '/datenschutz'
+    | '/impressum'
     | '/photovoltaik'
     | '/stromspeicher'
     | '/waermepumpe'
@@ -80,6 +113,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
   PhotovoltaikRoute: typeof PhotovoltaikRoute
   StromspeicherRoute: typeof StromspeicherRoute
   WaermepumpeRoute: typeof WaermepumpeRoute
@@ -93,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/photovoltaik': {
@@ -128,6 +177,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
   PhotovoltaikRoute: PhotovoltaikRoute,
   StromspeicherRoute: StromspeicherRoute,
   WaermepumpeRoute: WaermepumpeRoute,
