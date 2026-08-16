@@ -1,24 +1,67 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/sections/Hero";
+import { Products } from "@/components/sections/Products";
+import { EnergyFlow } from "@/components/sections/EnergyFlow";
+import { Process } from "@/components/sections/Process";
+import { About } from "@/components/sections/About";
+import { Why } from "@/components/sections/Why";
+import { Partners } from "@/components/sections/Partners";
+import { Advisor } from "@/components/sections/Advisor";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { company } from "@/lib/site";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "EnergieHeizTechnik – Photovoltaik, Wärmepumpe & nachhaltige Energielösungen";
+const description =
+  "EnergieHeizTechnik entwickelt individuelle Energielösungen mit Photovoltaik, Stromspeicher, Wärmepumpe und Wallbox – persönlich beraten und aus einer Hand.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: company.url }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: company.name,
+          email: company.email,
+          url: company.url,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: company.street,
+            postalCode: company.city.split(" ")[0],
+            addressLocality: company.city.split(" ").slice(1).join(" "),
+            addressCountry: "DE",
+          },
+          areaServed: "Region Hannover",
+          knowsAbout: ["Photovoltaik", "Stromspeicher", "Wärmepumpe", "Wallbox"],
+        }),
+      },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main>
+      <Hero />
+      <Products />
+      <EnergyFlow />
+      <Process />
+      <About />
+      <Why />
+      <Partners />
+      <Advisor />
+      <CtaBand />
+    </main>
   );
 }
