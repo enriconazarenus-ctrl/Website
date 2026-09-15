@@ -18,16 +18,25 @@ export function CtaBand() {
         aria-hidden
       />
       <div className="container-eht max-w-3xl">
-        <Reveal as="h2" className="display-2">
-          Bereit für Ihre eigene Energie?
+        <Reveal as="p" className="eyebrow text-ink-foreground/70">
+          <span className="inline-block h-px w-8 bg-brand" aria-hidden />
+          Ihre Wärmepumpe. Persönlich begleitet.
+        </Reveal>
+        <Reveal as="h2" className="display-2 mt-5">
+          Lernen wir Ihr Zuhause kennen.
         </Reveal>
         <Reveal as="p" delay={100} className="mt-5 text-lg leading-relaxed text-ink-foreground/80">
-          Lassen Sie uns gemeinsam herausfinden, welche Energielösung zu Ihrem Zuhause oder Unternehmen passt.
+          Keine Lösung von der Stange: Unser Team nimmt sich Zeit für Ihre Fragen und entwickelt mit
+          Ihnen eine Wärmepumpenlösung, die zu Ihrem Gebäude und Ihrem Alltag passt.
         </Reveal>
         <Reveal delay={180} className="mt-9">
           <CtaButton href="#kontakt" size="lg">
-            Jetzt kostenlos beraten lassen
+            Persönliche Wärmepumpen-Beratung
           </CtaButton>
+        </Reveal>
+        <Reveal as="p" delay={240} className="mt-5 text-sm text-ink-foreground/60">
+          Direkt aus Burgwedel · fester Ansprechpartner · Planung, Installation und Service aus
+          einer Hand
         </Reveal>
       </div>
     </section>

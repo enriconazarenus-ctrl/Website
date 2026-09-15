@@ -10,9 +10,9 @@ import { Advisor } from "@/components/sections/Advisor";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { company } from "@/lib/site";
 
-const title = "EnergieHeizTechnik – Photovoltaik, Wärmepumpe & nachhaltige Energielösungen";
+const title = "EnergieHeizTechnik – Buderus Wärmepumpen & persönliche Beratung";
 const description =
-  "EnergieHeizTechnik entwickelt individuelle Energielösungen mit Photovoltaik, Stromspeicher, Wärmepumpe und Wallbox – persönlich beraten und aus einer Hand.";
+  "Ihr Team aus Burgwedel für moderne Buderus Wärmepumpen: persönlich geplant, sauber installiert und dauerhaft begleitet – ergänzt durch Photovoltaik, Speicher und Wallbox.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/")({
             addressCountry: "DE",
           },
           areaServed: "Region Hannover",
-          knowsAbout: ["Photovoltaik", "Stromspeicher", "Wärmepumpe", "Wallbox"],
+          knowsAbout: ["Wärmepumpe", "Photovoltaik", "Stromspeicher", "Wallbox"],
         }),
       },
     ],
@@ -54,10 +54,10 @@ function Home() {
   return (
     <main>
       <Hero />
+      <About />
       <Products />
       <EnergyFlow />
       <Process />
-      <About />
       <Why />
       <Partners />
       <Advisor />

@@ -81,17 +81,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EnergieHeizTechnik – Photovoltaik, Wärmepumpe & Energielösungen" },
+      { title: "EnergieHeizTechnik – Buderus Wärmepumpen & persönliche Beratung" },
       {
         name: "description",
         content:
-          "EnergieHeizTechnik entwickelt individuelle Energielösungen mit Photovoltaik, Stromspeicher, Wärmepumpe und Wallbox.",
+          "Ihr Team aus Burgwedel für moderne Buderus Wärmepumpen – persönlich geplant, sauber installiert und dauerhaft begleitet.",
       },
       { name: "author", content: "EHT EnergieHeizTechnik GmbH" },
-      { property: "og:title", content: "EnergieHeizTechnik – Energielösungen aus einer Hand" },
+      {
+        property: "og:title",
+        content: "EnergieHeizTechnik – Wärmepumpen persönlich geplant",
+      },
       {
         property: "og:description",
-        content: "Photovoltaik, Stromspeicher, Wärmepumpe und Wallbox – persönlich beraten und aus einer Hand.",
+        content:
+          "Buderus Wärmepumpen aus Burgwedel: persönliche Beratung, Installation und Service aus einer Hand.",
       },
       { property: "og:locale", content: "de_DE" },
       { property: "og:type", content: "website" },

@@ -1,21 +1,21 @@
-import { ShieldCheck, Headphones, UserRoundCog } from "lucide-react";
+import { Headphones, ShieldCheck, UserRoundCog } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 
 const items = [
   {
+    icon: UserRoundCog,
+    title: "Ein fester Ansprechpartner",
+    text: "Eine Person kennt Ihr Projekt, bündelt Ihre Fragen und begleitet Sie vom ersten Gespräch bis zur Inbetriebnahme.",
+  },
+  {
     icon: ShieldCheck,
-    title: "Höchste Qualität",
-    text: "Unsere Lösungen stehen für geprüfte Technik und langlebige Qualität. Wir setzen ausschließlich auf hochwertige Komponenten namhafter Hersteller und arbeiten mit erfahrenen Fachkräften – für maximale Zuverlässigkeit und Effizienz.",
+    title: "Verständlich geplant",
+    text: "Wir erklären unsere Empfehlung nachvollziehbar und dimensionieren Ihre Wärmepumpe passend zu Gebäude, Bedarf und Alltag.",
   },
   {
     icon: Headphones,
-    title: "Verlässlicher Support",
-    text: "Wir sind für Sie da – auch außerhalb der üblichen Geschäftszeiten. Ob telefonisch, per Mail oder persönlich: Unser Team beantwortet Ihre Fragen schnell, kompetent und individuell.",
-  },
-  {
-    icon: UserRoundCog,
-    title: "Individuelle Beratung",
-    text: "Jedes Projekt ist einzigartig. Deshalb nehmen wir uns Zeit, Ihre Bedürfnisse genau zu verstehen und maßgeschneiderte Energielösungen zu entwickeln – transparent, ehrlich und zukunftsorientiert.",
+    title: "Auch danach erreichbar",
+    text: "Nach Einbau und Einweisung bleiben wir Ihr Ansprechpartner für Fragen, Service und die langfristige Betreuung Ihrer Anlage.",
   },
 ];
 
@@ -26,10 +26,10 @@ export function Why() {
         <div className="max-w-3xl">
           <Reveal as="p" className="eyebrow">
             <span className="brand-rule inline-block h-px w-8" aria-hidden />
-            Warum EnergieHeizTechnik
+            So arbeiten wir
           </Reveal>
           <Reveal as="h2" delay={80} className="display-2 mt-5">
-            Qualität, die man plant. Service, den man spürt.
+            Bei uns bleibt Technik persönlich.
           </Reveal>
         </div>
 

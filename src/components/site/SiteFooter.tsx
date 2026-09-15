@@ -8,10 +8,17 @@ export function SiteFooter() {
     <footer className="bg-ink text-ink-foreground">
       <div className="container-eht grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:py-20">
         <div>
-          <img src={logo} alt="EnergieHeizTechnik Logo" width={1123} height={390} loading="lazy" className="h-10 w-auto" />
+          <img
+            src={logo}
+            alt="EnergieHeizTechnik Logo"
+            width={1123}
+            height={390}
+            loading="lazy"
+            className="h-10 w-auto"
+          />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-muted">
-            Ganzheitliche Energielösungen aus einer Hand – Photovoltaik, Stromspeicher, Wärmepumpe und Wallbox.
-            Persönlich, transparent und zukunftsorientiert.
+            Ihr Team aus Burgwedel für moderne Buderus Wärmepumpentechnik und sinnvoll abgestimmte
+            Energiesysteme. Persönlich geplant, sauber umgesetzt und dauerhaft begleitet.
           </p>
           <address className="mt-6 space-y-2 text-sm not-italic text-ink-muted">
             <p className="flex items-start gap-2">
@@ -24,7 +31,10 @@ export function SiteFooter() {
             </p>
             <p className="flex items-center gap-2">
               <Mail className="size-4 text-brand" aria-hidden />
-              <a className="transition-colors hover:text-ink-foreground" href={`mailto:${company.email}`}>
+              <a
+                className="transition-colors hover:text-ink-foreground"
+                href={`mailto:${company.email}`}
+              >
                 {company.email}
               </a>
             </p>
@@ -32,7 +42,9 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label="Footer Navigation">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">Navigation</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+            Navigation
+          </h2>
           <ul className="mt-5 space-y-3 text-sm">
             {[
               { label: "Über uns", href: "/#ueber-uns" },
@@ -42,7 +54,10 @@ export function SiteFooter() {
               { label: "Kontakt", href: "/#kontakt" },
             ].map((i) => (
               <li key={i.href}>
-                <a className="text-ink-foreground/80 transition-colors hover:text-brand" href={i.href}>
+                <a
+                  className="text-ink-foreground/80 transition-colors hover:text-brand"
+                  href={i.href}
+                >
                   {i.label}
                 </a>
               </li>
@@ -51,30 +66,43 @@ export function SiteFooter() {
         </nav>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">Produkte</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+            Produkte
+          </h2>
           <ul className="mt-5 space-y-3 text-sm">
             {[
+              { label: "Wärmepumpe", to: "/waermepumpe" },
               { label: "Photovoltaik", to: "/photovoltaik" },
               { label: "Stromspeicher", to: "/stromspeicher" },
-              { label: "Wärmepumpe", to: "/waermepumpe" },
               { label: "Wallbox", to: "/wallbox" },
             ].map((i) => (
               <li key={i.to}>
-                <Link className="text-ink-foreground/80 transition-colors hover:text-brand" to={i.to}>
+                <Link
+                  className="text-ink-foreground/80 transition-colors hover:text-brand"
+                  to={i.to}
+                >
                   {i.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <h2 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">Rechtliches</h2>
+          <h2 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+            Rechtliches
+          </h2>
           <ul className="mt-5 space-y-3 text-sm">
             <li>
-              <Link className="text-ink-foreground/80 transition-colors hover:text-brand" to="/impressum">
+              <Link
+                className="text-ink-foreground/80 transition-colors hover:text-brand"
+                to="/impressum"
+              >
                 Impressum
               </Link>
             </li>
             <li>
-              <Link className="text-ink-foreground/80 transition-colors hover:text-brand" to="/datenschutz">
+              <Link
+                className="text-ink-foreground/80 transition-colors hover:text-brand"
+                to="/datenschutz"
+              >
                 Datenschutz
               </Link>
             </li>
@@ -84,8 +112,12 @@ export function SiteFooter() {
 
       <div className="border-t border-ink-foreground/10">
         <div className="container-eht flex flex-col gap-2 py-6 text-xs text-ink-muted md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} {company.name}. Alle Rechte vorbehalten.</p>
-          <p>{company.court} · {company.hrb}</p>
+          <p>
+            © {new Date().getFullYear()} {company.name}. Alle Rechte vorbehalten.
+          </p>
+          <p>
+            {company.court} · {company.hrb}
+          </p>
         </div>
       </div>
     </footer>

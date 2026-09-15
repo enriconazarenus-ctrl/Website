@@ -13,6 +13,7 @@ export const company = {
 };
 
 export const partners = [
+  { name: "Buderus", note: "Wärmepumpen & Heiztechnik" },
   { name: "Huawei", note: "Wechselrichter & Energiemanagement" },
   { name: "Sungrow", note: "Wechselrichter" },
   { name: "AlphaESS", note: "Stromspeicher" },

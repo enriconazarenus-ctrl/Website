@@ -35,7 +35,7 @@ const empty: Data = {
   privacy: false,
 };
 
-const interestOptions = ["Photovoltaik", "Wärmepumpe", "Stromspeicher", "Wallbox"];
+const interestOptions = ["Wärmepumpe", "Photovoltaik", "Stromspeicher", "Wallbox"];
 const roofOptions = ["Satteldach", "Flachdach", "Pultdach", "Andere"];
 const orientationOptions = ["Süd", "Ost", "West", "Nord"];
 const storageOptions = ["Ja", "Nein", "Noch unentschlossen"];
@@ -45,10 +45,12 @@ function OptionButton({
   label,
   selected,
   onClick,
+  badge,
 }: {
   label: string;
   selected: boolean;
   onClick: () => void;
+  badge?: string;
 }) {
   return (
     <button
@@ -62,7 +64,14 @@ function OptionButton({
           : "border-line bg-card text-foreground hover:-translate-y-0.5 hover:border-brand/50",
       )}
     >
-      {label}
+      <span className="flex min-w-0 flex-col gap-1">
+        <span>{label}</span>
+        {badge && (
+          <span className="text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-brand">
+            {badge}
+          </span>
+        )}
+      </span>
       <span
         className={cn(
           "flex size-5 items-center justify-center rounded-full border transition-colors",
@@ -82,13 +91,19 @@ export function Advisor() {
   const [done, setDone] = useState(false);
 
   const wantsHeatPump = data.interests.includes("Wärmepumpe");
+  const wantsPhotovoltaics = data.interests.includes("Photovoltaik");
+  const wantsStorage = data.interests.includes("Stromspeicher");
+  const wantsWallbox = data.interests.includes("Wallbox");
 
   const steps = useMemo(() => {
-    const base = ["interests", "roof", "orientation", "area", "consumption", "storage"];
-    if (wantsHeatPump) base.push("heatpump");
-    base.push("contact");
-    return base;
-  }, [wantsHeatPump]);
+    const flow = ["interests"];
+    if (wantsPhotovoltaics) flow.push("roof", "orientation", "area");
+    if (wantsPhotovoltaics || wantsStorage || wantsWallbox) flow.push("consumption");
+    if (wantsPhotovoltaics && !wantsStorage) flow.push("storage");
+    if (wantsHeatPump) flow.push("heatpump");
+    flow.push("contact");
+    return flow;
+  }, [wantsHeatPump, wantsPhotovoltaics, wantsStorage, wantsWallbox]);
 
   const current = steps[Math.min(step, steps.length - 1)];
   const total = steps.length;
@@ -109,7 +124,8 @@ export function Advisor() {
         return data.storage ? null : "Bitte wählen Sie eine Option.";
       case "contact":
         if (!data.name.trim()) return "Bitte geben Sie Ihren Namen an.";
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Bitte geben Sie eine gültige E-Mail-Adresse an.";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+          return "Bitte geben Sie eine gültige E-Mail-Adresse an.";
         if (!data.privacy) return "Bitte bestätigen Sie die Datenschutzerklärung.";
         return null;
       default:
@@ -147,13 +163,14 @@ export function Advisor() {
         <div>
           <Reveal as="p" className="eyebrow">
             <span className="brand-rule inline-block h-px w-8" aria-hidden />
-            Beratung
+            Persönliche Beratung
           </Reveal>
           <Reveal as="h2" delay={80} className="display-2 mt-5">
-            Finden Sie Ihre passende Energielösung.
+            Passt eine Wärmepumpe zu Ihrem Zuhause?
           </Reveal>
           <Reveal as="p" delay={140} className="lead mt-5">
-            Beantworten Sie ein paar kurze Fragen – wir melden uns persönlich mit einer Einschätzung zu Ihrem Projekt.
+            Beantworten Sie ein paar kurze Fragen. Danach schaut ein Mensch aus unserem Team auf Ihr
+            Projekt und meldet sich mit einer ersten, ehrlichen Einschätzung.
           </Reveal>
           <Reveal delay={200} className="mt-8 space-y-3 text-sm text-muted-foreground">
             <p>Lieber direkt schreiben?</p>
@@ -193,8 +210,8 @@ export function Advisor() {
                 </svg>
                 <h3 className="display-2">Vielen Dank für Ihre Anfrage.</h3>
                 <p className="lead">
-                  Wir haben Ihre Angaben erhalten und melden uns persönlich bei Ihnen – in der Regel innerhalb eines
-                  Werktages.
+                  Wir haben Ihre Angaben erhalten und melden uns persönlich bei Ihnen – in der Regel
+                  innerhalb eines Werktages.
                 </p>
               </div>
             ) : (
@@ -223,7 +240,7 @@ export function Advisor() {
                 <div key={current} className="animate-rise mt-8">
                   {current === "interests" && (
                     <fieldset>
-                      <legend className="display-3">Wofür interessieren Sie sich?</legend>
+                      <legend className="display-3">Wobei dürfen wir Sie unterstützen?</legend>
                       <p className="mt-2 text-sm text-muted-foreground">Mehrfachauswahl möglich.</p>
                       <div className="mt-6 grid gap-3 sm:grid-cols-2">
                         {interestOptions.map((o) => (
@@ -232,6 +249,7 @@ export function Advisor() {
                             label={o}
                             selected={data.interests.includes(o)}
                             onClick={() => toggle("interests", o)}
+                            badge={o === "Wärmepumpe" ? "Unser Schwerpunkt" : undefined}
                           />
                         ))}
                       </div>
@@ -257,7 +275,9 @@ export function Advisor() {
                   {current === "orientation" && (
                     <fieldset>
                       <legend className="display-3">Wie ist Ihr Dach ausgerichtet?</legend>
-                      <p className="mt-2 text-sm text-muted-foreground">Falls bekannt – Mehrfachauswahl möglich.</p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Falls bekannt – Mehrfachauswahl möglich.
+                      </p>
                       <div className="mt-6 grid gap-3 sm:grid-cols-2">
                         {orientationOptions.map((o) => (
                           <OptionButton
@@ -276,7 +296,9 @@ export function Advisor() {
                       <label htmlFor="roofArea" className="display-3 block">
                         Wie groß ist Ihre Dachfläche?
                       </label>
-                      <p className="mt-2 text-sm text-muted-foreground">Angabe in m² – eine Schätzung genügt.</p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Angabe in m² – eine Schätzung genügt.
+                      </p>
                       <input
                         id="roofArea"
                         type="number"
@@ -305,7 +327,9 @@ export function Advisor() {
                         max={20000}
                         step={100}
                         value={data.consumption}
-                        onChange={(e) => setData((d) => ({ ...d, consumption: Number(e.target.value) }))}
+                        onChange={(e) =>
+                          setData((d) => ({ ...d, consumption: Number(e.target.value) }))
+                        }
                         className="mt-6 w-full accent-[oklch(0.70_0.176_52)]"
                       />
                       <div className="mt-2 flex justify-between text-xs text-muted-foreground">
@@ -317,7 +341,9 @@ export function Advisor() {
 
                   {current === "storage" && (
                     <fieldset>
-                      <legend className="display-3">Interessieren Sie sich für einen Stromspeicher?</legend>
+                      <legend className="display-3">
+                        Interessieren Sie sich für einen Stromspeicher?
+                      </legend>
                       <div className="mt-6 grid gap-3">
                         {storageOptions.map((o) => (
                           <OptionButton
@@ -417,10 +443,14 @@ export function Advisor() {
                           />
                           <span>
                             Ich habe die{" "}
-                            <Link to="/datenschutz" className="text-brand underline underline-offset-2">
+                            <Link
+                              to="/datenschutz"
+                              className="text-brand underline underline-offset-2"
+                            >
                               Datenschutzerklärung
                             </Link>{" "}
-                            zur Kenntnis genommen und bin mit der Verarbeitung meiner Daten einverstanden.
+                            zur Kenntnis genommen und bin mit der Verarbeitung meiner Daten
+                            einverstanden.
                           </span>
                         </label>
                       </div>
@@ -429,7 +459,10 @@ export function Advisor() {
                 </div>
 
                 {error && (
-                  <p role="alert" className="mt-5 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                  <p
+                    role="alert"
+                    className="mt-5 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                  >
                     {error}
                   </p>
                 )}
@@ -450,7 +483,7 @@ export function Advisor() {
 
                   {current === "contact" ? (
                     <CtaButton type="submit" size="lg">
-                      Kostenlose Beratung anfragen
+                      Persönliche Beratung anfragen
                     </CtaButton>
                   ) : (
                     <button
@@ -459,7 +492,10 @@ export function Advisor() {
                       className="group inline-flex h-12 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-ink-foreground transition-all duration-300 hover:-translate-y-0.5"
                     >
                       Weiter
-                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                      <ArrowRight
+                        className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                        aria-hidden
+                      />
                     </button>
                   )}
                 </div>

@@ -6,10 +6,10 @@ import { CtaButton } from "@/components/CtaButton";
 import { cn } from "@/lib/utils";
 
 const nav = [
+  { label: "Wärmepumpe", href: "/waermepumpe" },
+  { label: "Unser Team", href: "/#ueber-uns" },
+  { label: "Energiesystem", href: "/#system" },
   { label: "Produkte", href: "/#produkte" },
-  { label: "System", href: "/#system" },
-  { label: "Über uns", href: "/#ueber-uns" },
-  { label: "Warum wir", href: "/#warum" },
   { label: "Kontakt", href: "/#kontakt" },
 ];
 
@@ -35,7 +35,9 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled ? "bg-ink/85 backdrop-blur-xl border-b border-ink-foreground/10" : "bg-transparent",
+        scrolled
+          ? "bg-ink/85 backdrop-blur-xl border-b border-ink-foreground/10"
+          : "bg-transparent",
       )}
     >
       <div className="container-eht flex h-20 items-center justify-between gap-6">
@@ -63,7 +65,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:block">
-          <CtaButton href="/#kontakt">Beratung anfragen</CtaButton>
+          <CtaButton href="/#kontakt">Persönlich beraten lassen</CtaButton>
         </div>
 
         <button
@@ -94,7 +96,7 @@ export function SiteHeader() {
           </nav>
           <div className="mt-8">
             <CtaButton href="/#kontakt" size="lg" className="w-full" onClick={() => setOpen(false)}>
-              Beratung anfragen
+              Persönlich beraten lassen
             </CtaButton>
           </div>
         </div>

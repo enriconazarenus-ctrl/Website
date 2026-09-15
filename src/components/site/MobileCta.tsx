@@ -4,7 +4,14 @@ import { CtaButton } from "@/components/CtaButton";
 export function MobileCta() {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 700);
+    const onScroll = () => {
+      const cinematicHero = document.querySelector<HTMLElement>(".light-story");
+      const threshold = cinematicHero
+        ? cinematicHero.offsetTop + cinematicHero.offsetHeight - window.innerHeight * 0.7
+        : 700;
+      setShow(window.scrollY > threshold);
+    };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -16,7 +23,7 @@ export function MobileCta() {
       }`}
     >
       <CtaButton href="/#kontakt" size="lg" className="w-full">
-        Kostenlose Beratung
+        Persönlich beraten lassen
       </CtaButton>
     </div>
   );
